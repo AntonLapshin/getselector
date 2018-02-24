@@ -1,0 +1,37 @@
+{
+  "name": "getselector",
+  "version": "1.0.0",
+  "description": "Get Selector Browser Extension",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "copy": "cp src/manifest.json bin/manifest.json & cp src/background.js bin/background.js & cp src/icon.png bin/icon.png",
+    "build": "./node_modules/.bin/rollup -c rollup.config.js & npm run copy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntonLapshin/getselector.git"
+  },
+  "keywords": [
+    "get",
+    "css",
+    "selector",
+    "find",
+    "unique",
+    "browser",
+    "extension"
+  ],
+  "author": "AntonLapshin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AntonLapshin/getselector/issues"
+  },
+  "homepage": "https://github.com/AntonLapshin/getselector#readme",
+  "devDependencies": {
+    "rollup": "^0.56.2",
+    "rollup-plugin-node-resolve": "^3.0.3"
+  },
+  "dependencies": {
+    "lodash": "^4.17.5"
+  }
+}
