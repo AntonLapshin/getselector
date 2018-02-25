@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "copy": "cp src/manifest.json bin/manifest.json & cp src/background.js bin/background.js & cp src/icon.png bin/icon.png",
+    "copy": "cp src/manifest.json bin/manifest.json & cp src/background.js bin/background.js & cp src/toggle.js bin/toggle.js & cp src/*.png bin/",
     "build": "./node_modules/.bin/rollup -c rollup.config.js & npm run copy"
   },
   "repository": {

@@ -13,8 +13,7 @@ export default {
     commonjs({
       exclude: [],
       include: [
-        'node_modules/@medv/finder/**',
-        'node_modules/lodash/**',
+        'node_modules/**',
       ]
     })
   ]
