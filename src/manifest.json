@@ -1,7 +1,8 @@
 {
-  "name": "Get Selector",
-  "description": "Get Selector",
-  "version": "0.9",
+  "name": "Get Unique CSS Selector",
+  "short_name": "Get Selector",
+  "description": "Find unique CSS selector of any item on your page. Hover and click.",
+  "version": "1.0",
   "permissions": ["activeTab", "declarativeContent", "*://*/*"],
   "background": {
     "scripts": ["background.js"],
