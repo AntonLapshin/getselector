@@ -4,7 +4,7 @@ import commonjs from 'rollup-plugin-commonjs';
 export default {
   input: 'src/index.js',
   output: {
-    format: 'es',
+    format: 'iife',
     file: 'bin/inject.js',
     name: 'getselector'
   },
@@ -13,7 +13,7 @@ export default {
     commonjs({
       exclude: [],
       include: [
-        'node_modules/**',
+        'node_modules/**'
       ]
     })
   ]
