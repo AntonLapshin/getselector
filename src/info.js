@@ -1,4 +1,4 @@
-import { addStyle } from './helper';
+import { addStyle } from "./addStyle";
 
 const STYLES = `
     .gs_message {
@@ -20,14 +20,14 @@ const STYLES = `
 
 export const showMessage = html => {
   if (!message) {
-    throw 'Call init method before';
+    throw "Call init method before";
   }
-  message.innerHTML = '[click to find and copy unique css selector] for the selected dom element: ' + html;
-  message.classList.toggle('gs_show', true);
+  message.innerHTML = "[click to copy the unique css selector for]: " + html;
+  message.classList.toggle("gs_show", true);
 };
 
 export const hideMessage = () => {
-  message.classList.toggle('gs_show', false);
+  message.classList.toggle("gs_show", false);
 };
 
 let message = null;
@@ -37,7 +37,7 @@ let message = null;
     return;
   }
   addStyle(STYLES);
-  message = document.createElement('div');
-  message.className = 'gs_message';
+  message = document.createElement("div");
+  message.className = "gs_message";
   document.body.appendChild(message);
 })();
