@@ -1,61 +1,18 @@
-import finder from "@medv/finder";
-import throttle from "lodash/throttle";
-import { addStyle } from "./addStyle";
-import { showMessage, hideMessage } from "./info";
-import { copy } from "./clipboard";
+import { init, toggle } from "./app";
 
 !(() => {
-  if (window.__gs && window.__gs.initialized) {
-    window.__gs.toggle();
-    return;
+  const global = window.__gs = window.__gs || {};
+
+  if (global.isInit){
+    toggle(global);
+  } else {
+    init(global);
+    toggle(global);
   }
+})();
+/*
+!(() => {
 
-  const gs = (window.__gs = {
-    state: false,
-    items: new Set(),
-    activeItem: null,
-    finder,
-    throttle,
-    showMessage,
-    hideMessage,
-    copy
-  });
-
-  //
-  // Clear the current state
-  //
-  gs.clear = () => {
-    gs.items.forEach(e => e.classList.remove("gs_hover"));
-    gs.items.clear();
-  };
-
-  //
-  // Toggle the extension
-  //
-  gs.toggle = () => {
-    gs.state = !gs.state;
-    const action = gs.state ? "addEventListener" : "removeEventListener";
-    document[action]("mouseover", gs.onMouseOver);
-    document[action]("mouseout", gs.onMouseOut);
-    document[action]("mousedown", gs.onMouseDown);
-    if (!gs.state) {
-      gs.clear();
-      gs.hideMessage();
-    }
-  };
-
-  const STYLES = `
-  .gs_hover {
-      background: repeating-linear-gradient(
-          135deg,
-          rgba(126,139,218,0.3),
-          rgba(126,139,218,0.3) 10px,
-          rgba(70,82,152,0.3) 10px,
-          rgba(70,82,152,0.3) 20px
-      );
-      cursor: pointer;
-  }
-`;
 
   gs.onMouseOver = throttle(function(e) {
     gs.activeItem = e.target;
@@ -73,8 +30,6 @@ import { copy } from "./clipboard";
     gs.showMessage(message);
   }, 200);
 
-  gs.onMouseOut = throttle(gs.clear, 200);
-
   gs.onMouseDown = e => {
     if (!gs.activeItem) {
       return;
@@ -90,9 +45,5 @@ import { copy } from "./clipboard";
     gs.copy(selector);
     return false;
   };
-
-  addStyle(STYLES);
-
-  gs.initialized = true;
-  gs.toggle();
 })();
+*/

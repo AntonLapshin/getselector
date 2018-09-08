@@ -32,7 +32,7 @@ const copyText = () => {
   return result;
 };
 
-export const copy = text => {
+export const copyToClipboard = text => {
   const fake = prepareFake(text);
   const result = copyText();
   document.body.removeChild(fake);
