@@ -19,7 +19,7 @@ const STYLES = `
 `;
 
 export const showMessage = (global, html) => {
-  global.message.innerHTML = html;
+  global.message.innerHTML = `You hovered: <b>${html}</b> Press [Space] to find Unique Selector and copy it to Clipboard`;
   global.message.classList.toggle("gs_show", true);
 };
 

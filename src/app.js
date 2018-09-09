@@ -55,16 +55,25 @@ export const init = global => {
     if (e.keyCode !== 32 || !selectedEl) {
       return;
     }
+    global.copiedEl && global.copiedEl.classList.remove("gs_copied");
     clearEl(selectedEl);
     const selector = finder(selectedEl);
     console.log("[GetSelector]: Copied to Clipboard: " + selector, selectedEl);
     copyToClipboard(selector);
+
+    global.copiedEl = selectedEl;
+    global.copiedEl.classList.add("gs_copied");
   };
 
   addStyle(`
     .gs_hover {
       background: repeating-linear-gradient( 135deg, rgba(225, 225, 226, 0.3), rgba(229, 229, 229, 0.3) 10px, rgba(173, 173, 173, 0.3) 10px, rgba(172, 172, 172, 0.3) 20px );
       box-shadow: inset 0px 0px 0px 1px #d7d7d7;
+    }
+
+    .gs_copied {
+      background: repeating-linear-gradient( 135deg, rgba(183, 240, 200, 0.3), rgba(192, 231, 194, 0.3) 10px, rgba(124, 189, 126, 0.3) 10px, rgba(137, 180, 129, 0.3) 20px ) !important;
+      box-shadow: inset 0px 0px 0px 1px #c4d9c2 !important;      
     }
   `);
   initMessage(global);
