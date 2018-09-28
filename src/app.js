@@ -77,4 +77,8 @@ export const init = global => {
     }
   `);
   initMessage(global);
+
+  chrome.runtime.onMessage.addListener(message => {
+    console.log(message);
+  });  
 };

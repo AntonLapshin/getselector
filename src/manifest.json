@@ -3,18 +3,16 @@
   "short_name": "Get Selector",
   "description": "Find unique CSS selector of any item on your page. Hover and click.",
   "version": "1.1",
-  "permissions": ["activeTab", "declarativeContent", "*://*/*"],
+  "permissions": ["activeTab", "declarativeContent", "*://*/*", "contextMenus"],
   "background": {
-    "scripts": ["background.js"],
-    "persistent": false
+    "scripts": ["background.js"]
   },
   "icons": {
     "32": "icon_32.png",
     "128": "icon_128.png"
   },
-  "page_action": {
-    "default_icon": "icon_32.png",
-    "default_title": "Get Selector"
+  "browser_action": {
+    "name": "Click to change the icon's color"
   },
   "manifest_version": 2
 }
