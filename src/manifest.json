@@ -3,7 +3,7 @@
   "short_name": "Get Selector",
   "description": "Find unique CSS selector of any item on your page. Hover and click.",
   "version": "1.1",
-  "permissions": ["activeTab", "declarativeContent", "*://*/*", "contextMenus"],
+  "permissions": ["tabs", "declarativeContent", "*://*/*", "contextMenus"],
   "background": {
     "scripts": ["background.js"]
   },
