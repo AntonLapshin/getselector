@@ -1,19 +1,53 @@
-const getState = tabId => 
+const getState = tabId =>
   new Promise(resolve => {
     chrome.tabs.executeScript(
       tabId,
       {
         code: "window.__gs && window.__gs.state"
       },
-      result => resolve(result[0])
+      result => resolve(result && result[0])
     );
   });
 
-const updateIcon = isPressed => chrome.browserAction.setIcon({
-  path: `icon_128${isPressed ? "_pressed" : ""}.png`
-});
+const copySelector = tabId =>
+  chrome.tabs.executeScript(tabId, {
+    code: "window.__gs && window.__gs.copyToClipboard()"
+  });
+
+const updateIcon = isPressed =>
+  chrome.browserAction.setIcon({
+    path: `icon_128${isPressed ? "_pressed" : ""}.png`
+  });
 
 !(() => {
+  const MENU_ID = "GETSELECTOR";
+
+  const toggle = async () => {
+    const state = await getState(selectedTabId);
+    updateIcon(state);
+  
+    if (state) {
+      chrome.contextMenus.create({
+        id: MENU_ID,
+        title: "Get Unique Selector",
+        contexts: ["all"],
+        documentUrlPatterns: ["*://*/*"],
+        onclick: e => {
+          if (e.menuItemId !== MENU_ID) {
+            return;
+          }
+          copySelector(selectedTabId);
+        }
+      }); 
+      isMenuAdded = true; 
+    } else if (isMenuAdded) {
+      chrome.contextMenus.remove(MENU_ID);
+    }
+  }  
+
+  let isMenuAdded = false;
+  let selectedTabId = null;
+
   chrome.browserAction.onClicked.addListener(tab => {
     chrome.tabs.executeScript(
       tab.ib,
@@ -21,41 +55,15 @@ const updateIcon = isPressed => chrome.browserAction.setIcon({
         file: "inject.js"
       },
       async () => {
-        const state = await getState(tab.id);
-        updateIcon(state);
-        // chrome.contextMenus.create({
-        //   id: "GETSELECTOR_" + tab.id,
-        //   title: "Get Unique Selector",
-        //   contexts: ["editable"],
-        //   documentUrlPatterns: ["*://*/*"]
-        // });
+        selectedTabId = tab.id;
+        toggle();
       }
     );
   });
 
   chrome.tabs.onActivated.addListener(async tab => {
-    const state = await getState(tab.id);
-    updateIcon(state);    
-  })
+    selectedTabId = tab.id;
+    toggle();
+  });
+
 })();
-
-// chrome.contextMenus.onClicked.addListener((info, tab) => {
-//   chrome.tabs.sendMessage(tab.id, { info });
-// });
-
-// chrome.runtime.onInstalled.addListener(function() {
-//   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
-//     chrome.declarativeContent.onPageChanged.addRules([
-//       {
-//         conditions: [
-//           new chrome.declarativeContent.PageStateMatcher({
-//             css: ["body"]
-//           })
-//         ],
-//         actions: [new chrome.declarativeContent.ShowPageAction()]
-//       }
-//     ]);
-//   });
-// });
-
-// chrome.browserAction.onClicked.addListener(updateIcon);

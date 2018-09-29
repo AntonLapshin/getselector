@@ -12,7 +12,6 @@ export const toggle = global => {
   const action = state ? "addEventListener" : "removeEventListener";
   document[action]("mouseover", global.selectElement);
   document[action]("mouseout", global.clearElThrottle);
-  document[action]("keyup", global.copyToClipboard);
 
   if (!state) {
     clearEl(global.selectedEl);
@@ -49,10 +48,9 @@ export const init = global => {
     showMessage(global, message);
   }, 200);
 
-  global.copyToClipboard = e => {
-    console.log(e);
+  global.copyToClipboard = () => {
     const { selectedEl } = global;
-    if (e.keyCode !== 32 || !selectedEl) {
+    if (!selectedEl) {
       return;
     }
     global.copiedEl && global.copiedEl.classList.remove("gs_copied");
@@ -76,9 +74,5 @@ export const init = global => {
       box-shadow: inset 0px 0px 0px 1px #c4d9c2 !important;      
     }
   `);
-  initMessage(global);
-
-  chrome.runtime.onMessage.addListener(message => {
-    console.log(message);
-  });  
+  initMessage(global); 
 };

@@ -6,7 +6,7 @@ import { init, toggle } from "./app";
   if (global.isInit){
     toggle(global);
   } else {
-    console.log("GetSelector inject");
+    console.log("[GetSelector]: Injected");
     init(global);
     toggle(global);
   }
