@@ -66,4 +66,9 @@ const updateIcon = isPressed =>
     toggle();
   });
 
+  chrome.tabs.onUpdated.addListener(async tab => {
+    selectedTabId = tab.id;
+    toggle();
+  });
+
 })();
