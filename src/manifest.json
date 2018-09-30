@@ -2,8 +2,8 @@
   "name": "Get Unique CSS Selector",
   "short_name": "Get Selector",
   "description": "Find unique CSS selector of any item on your page. Open context menu and Copy to clipboard",
-  "version": "2.0",
-  "permissions": ["tabs", "declarativeContent", "*://*/*", "contextMenus"],
+  "version": "2.1",
+  "permissions": ["activeTab", "declarativeContent", "*://*/*", "contextMenus"],
   "background": {
     "scripts": ["background.js"]
   },
