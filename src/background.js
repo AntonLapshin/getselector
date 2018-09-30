@@ -29,7 +29,7 @@ const updateIcon = isPressed =>
     if (state) {
       chrome.contextMenus.create({
         id: MENU_ID,
-        title: "Get Unique Selector",
+        title: "Copy Unique Selector to Clipboard",
         contexts: ["all"],
         documentUrlPatterns: ["*://*/*"],
         onclick: e => {

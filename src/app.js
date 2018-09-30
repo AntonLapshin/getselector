@@ -1,5 +1,5 @@
 import finder from "@medv/finder";
-import throttle from "lodash/throttle";
+import debounce from "lodash/debounce";
 import { addStyle } from "./addStyle";
 import { initMessage, showMessage, hideMessage } from "./info";
 import { copyToClipboard } from "./clipboard";
@@ -11,10 +11,11 @@ export const toggle = global => {
   global.state = state;
   const action = state ? "addEventListener" : "removeEventListener";
   document[action]("mouseover", global.selectElement);
-  document[action]("mouseout", global.clearElThrottle);
+  document[action]("mouseout", global.clearElDebounce);
 
   if (!state) {
     clearEl(global.selectedEl);
+    global.copiedEl && global.copiedEl.classList.remove("gs_copied");
     hideMessage(global);
   }
 };
@@ -23,12 +24,12 @@ export const init = global => {
   global.isInit = true;
   global.selectedEl = null;
 
-  global.clearElThrottle = throttle(
+  global.clearElDebounce = debounce(
     () => clearEl(global.selectedEl) && hideMessage(global),
     200
   );
 
-  global.selectElement = throttle(e => {
+  global.selectElement = debounce(e => {
     if (global.selectedEl !== e.target) {
       clearEl(global.selectedEl);
     }
