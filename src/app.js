@@ -22,6 +22,7 @@ export const toggle = global => {
 
 export const init = global => {
   global.isInit = true;
+
   global.selectedEl = null;
 
   global.clearElDebounce = debounce(
@@ -56,6 +57,7 @@ export const init = global => {
     }
     global.copiedEl && global.copiedEl.classList.remove("gs_copied");
     clearEl(selectedEl);
+    var testvar = null;
     const selector = finder(selectedEl);
     console.log("[GetSelector]: Copied to Clipboard: " + selector, selectedEl);
     copyToClipboard(selector);
